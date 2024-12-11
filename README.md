@@ -5,7 +5,7 @@ Clone the repo, from terminal issue:
 <br><code>python saveall.py</code><br>
 
 This will save Stickies, Dock, and Countdown Timer Plus settings. 
-You can also save individual settings by providing args on command line:
+You can also save individual settings by providing args (case-insensitive) on command line:
 <br><code>python saveall.py stickies DOCK</code><br>
 
 This will only save Stickies, and Dock settings.
@@ -14,7 +14,7 @@ When needed later, restore your settings by running in terminal:
 <br><code>python restoreall.py</code><br>
 
 You can restore individual settings:
-<br><code>python restoreall.py countdown</code><br>
+<br><code>python restoreall.py CounTDowN</code><br>
 
 
 -----------------------------------------------
