@@ -1,12 +1,10 @@
-<h1>Save settings for pointer lists such as Dock, Stickies, CountdownTimerPlus etc. and restore them later in case they are lost following an update or a restart or a crash</h1>
+<h2>Save settings for pointer lists such as Dock, Stickies, CountdownTimerPlus etc. and restore them later in case they are lost following an update or a restart or a crash</h2>
 <h2>Save those annoying Plists with a single command</h2>
 
-fetch('https://api.github.com/users/yourusername')
-  .then(response => response.json())
-  .then(data => {
-    document.body.innerHTML += `<h2>GitHub Repos: ${data.public_repos}</h2>`;
-  });
-  
+Clone the repo, from terminal issue:
+
+  <code>python saveall.py</code>
+This will 
 **Before, the way you had it**
 ![Screenshot 2024-12-10 at 9 15 23 PM](https://github.com/user-attachments/assets/16bcb576-2eab-4476-bfa1-19101ca09063)
 ![Screenshot 2024-12-10 at 9 17 41 PM](https://github.com/user-attachments/assets/74eca74f-36ac-4f53-8a49-c60bd307ad8c)
