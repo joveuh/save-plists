@@ -31,11 +31,15 @@ run the restoreall.py script to restore its settings back from the
 def run():
     # Get user's HOME
     HOME = os.getenv("HOME")
-    source = HOME + "/Library/Containers/com.arvistech.countdowntimerplus/Data"
-    target = HOME + "/plists/countdown/Data"
-    epochtime = time.time()
-    backup = HOME + f"plists/backups/countdown_{epochtime}/Data"
-    restoreall.copy(target,backup)
+    source = os.path.join(
+        HOME, "Library", "Containers", "com.arvistech.countdowntimerplus", "Data"
+    )
+    target = os.path.join(HOME, "plists", "countdown", "Data")
+    epochtime = int(time.time())
+    backup = os.path.join(
+        HOME, "plists", "backups", "countdown", f"{epochtime}", "Data"
+    )
+    restoreall.copy(target, backup)
     restoreall.copy(source, target)
 
 

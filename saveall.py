@@ -24,7 +24,9 @@ def run(countdown: bool = True, stickies: bool = True, dock: bool = True):
 
 if __name__ == "__main__":
     args = [arg.lower() for arg in sys.argv[1:]]
-    len(args) == 0 and run(countdown=True, stickies=True, dock=True)
+    if len(args) == 0:
+        run(countdown=True, stickies=True, dock=True)
+        exit
     countdown = "countdown" in args
     stickies = "stickies" in args
     dock = "dock" in args

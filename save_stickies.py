@@ -35,11 +35,11 @@ def run():
     # Get user's HOME
     HOME = os.getenv("HOME")
 
-    source = HOME + "/Library/Containers/com.apple.Stickies/Data"
-    target = HOME + "/plists/stickies/Data"
-    epochtime = time.time()
-    backup = HOME + f"plists/backups/stickies_{epochtime}/Data"
-    restoreall.copy(target,backup)
+    source = os.path.join(HOME, "Library", "Containers", "com.apple.Stickies", "Data")
+    target = os.path.join(HOME, "plists", "stickies", "Data")
+    epochtime = int(time.time())
+    backup = os.path.join(HOME, "plists", "backups", "stickies", f"{epochtime}", "Data")
+    restoreall.copy(target, backup)
     restoreall.copy(source, target)
 
 
