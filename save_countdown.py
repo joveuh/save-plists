@@ -1,4 +1,4 @@
-import restoreall, os
+import restoreall, os, time
 
 """
 This program will save you current CountDown Timer Plus settings
@@ -31,9 +31,11 @@ run the restoreall.py script to restore its settings back from the
 def run():
     # Get user's HOME
     HOME = os.getenv("HOME")
-
     source = HOME + "/Library/Containers/com.arvistech.countdowntimerplus/Data"
     target = HOME + "/plists/countdown/Data"
+    epochtime = time.time()
+    backup = HOME + f"plists/backups/countdown_{epochtime}/Data"
+    restoreall.copy(target,backup)
     restoreall.copy(source, target)
 
 

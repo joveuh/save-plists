@@ -1,4 +1,4 @@
-import shutil, os
+import shutil, os, time
 
 """
 This program will save your current Dock settings
@@ -23,7 +23,9 @@ def run():
 
     source = HOME + "/Library/Preferences/com.apple.dock.plist"
     target = HOME + "/plists/dock/com.apple.dock.plist"
-
+    epochtime = time.time()
+    backup = HOME + f"plists/backups/dock_{epochtime}/Data"
+    shutil.copy2(target,backup)
     shutil.copy2(source, target)
 
 

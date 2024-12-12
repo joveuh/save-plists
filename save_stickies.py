@@ -1,4 +1,4 @@
-import restoreall, os
+import restoreall, os, time
 
 """
 This program will save you current Stickies (including settings)
@@ -37,6 +37,9 @@ def run():
 
     source = HOME + "/Library/Containers/com.apple.Stickies/Data"
     target = HOME + "/plists/stickies/Data"
+    epochtime = time.time()
+    backup = HOME + f"plists/backups/stickies_{epochtime}/Data"
+    restoreall.copy(target,backup)
     restoreall.copy(source, target)
 
 
