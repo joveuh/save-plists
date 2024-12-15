@@ -1,6 +1,7 @@
-<h2>Save settings for pointer lists such as Dock, Stickies, CountdownTimerPlus etc. and restore them later in case they are lost following an update or a restart or a crash</h2>
-<h2>Save those annoying Plists with a single command</h2>
+<h3>Save settings for pointer lists such as Dock, Stickies, CountdownTimerPlus etc. and restore them later in case they are lost following an update or a restart or a crash</h3>
+<h3>Save those annoying Plists with a single command</h3>
 
+<p><a href="https://github.com/joveuh/save-plists">Save Plists repo</a></p>
 Clone the repo, from terminal issue:
 <br><code>python saveall.py</code><br>
 
