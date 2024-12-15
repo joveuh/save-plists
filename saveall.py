@@ -15,8 +15,9 @@ def run(countdown: bool = True, stickies: bool = True, dock: bool = True):
         save_stickies.run()
         time.sleep(0.2)
     if dock:
-        restoreall.restart_dock()
-        time.sleep(0.6)
+        # In case user made changes recently, we don't want to restart Dock before saving current settings, 
+        # this plist should be saved right as soon as user makes any changes - should not need a restart of Dock
+        time.sleep(1)
         save_dock.run()
         time.sleep(0.2)
         restoreall.restart_dock()
