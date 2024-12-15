@@ -171,7 +171,8 @@ if __name__ == "__main__":
     if len(args) == 0:
         run(countdown=True, stickies=True, dock=True)
         exit
-    countdown = "countdown" in args
-    stickies = "stickies" in args
-    dock = "dock" in args
-    run(countdown, stickies, dock)
+    else:
+        countdown = "countdown" in args
+        stickies = "stickies" in args
+        dock = "dock" in args
+        run(countdown, stickies, dock)
