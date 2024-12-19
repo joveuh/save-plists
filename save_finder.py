@@ -27,7 +27,11 @@ def run():
     backup = os.path.join(
         HOME, "plists", "backups", "finder", f"{epochtime}", "com.apple.finder.plist"
     )
-    os.makedirs(backup)
+    target_dir = os.path.dirname(target)
+    if not os.path.exists(target_dir):
+        os.makedirs(target_dir)
+    if not os.path.exists(backup):
+        os.makedirs(backup)
     shutil.copy2(target, backup)
     shutil.copy2(source, target)
 
