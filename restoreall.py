@@ -143,7 +143,12 @@ def restart_countdown():
         print("The `open` command was not found. Make sure you're on macOS.")
 
 
-def run(countdown: bool = True, stickies: bool = True, dock: bool = True):
+def run(
+    countdown: bool = True,
+    stickies: bool = True,
+    dock: bool = True,
+    finder: bool = True,
+):
 
     HOME = os.getenv("HOME")
 

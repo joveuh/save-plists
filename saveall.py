@@ -1,7 +1,12 @@
 import sys, save_stickies, save_dock, save_countdown, save_finder, restoreall, time
 
 
-def run(countdown: bool = True, stickies: bool = True, dock: bool = True):
+def run(
+    countdown: bool = True,
+    stickies: bool = True,
+    dock: bool = True,
+    finder: bool = True,
+):
     scripts = [save_countdown, save_dock, save_stickies, save_finder]
     if countdown:
         restoreall.terminate_countdown()
