@@ -15,7 +15,7 @@ def run(
         time.sleep(0.2)
         restoreall.restart_countdown()
     if stickies:
-        restoreall.terminate_countdown()
+        restoreall.terminate_stickies()
         time.sleep(0.6)
         save_stickies.run()
         time.sleep(0.2)
