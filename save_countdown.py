@@ -39,7 +39,8 @@ def run():
     backup = os.path.join(
         HOME, "plists", "backups", "countdown", f"{epochtime}", "Data"
     )
-    restoreall.copy(target, backup)
+    if os.path.exists(target) and os.path.getsize(target) > 0:
+        restoreall.copy(target, backup)
     restoreall.copy(source, target)
 
 

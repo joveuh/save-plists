@@ -32,7 +32,8 @@ def run():
         os.makedirs(target_dir)
     if not os.path.exists(backup):
         os.makedirs(backup)
-    shutil.copy2(target, backup)
+    if os.path.exists(target) and os.path.getsize(target) > 0:
+        shutil.copy2(target, backup)
     shutil.copy2(source, target)
 
 
