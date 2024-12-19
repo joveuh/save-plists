@@ -19,6 +19,7 @@ def run(
         time.sleep(0.6)
         save_stickies.run()
         time.sleep(0.2)
+        restoreall.restart_stickies()
     if dock:
         time.sleep(1)
         save_dock.run()
