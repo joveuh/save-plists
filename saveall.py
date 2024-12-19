@@ -7,7 +7,7 @@ def run(
     dock: bool = True,
     finder: bool = True,
 ):
-    scripts = [save_countdown, save_dock, save_stickies, save_finder]
+
     if countdown:
         restoreall.terminate_countdown()
         time.sleep(0.6)
@@ -35,7 +35,7 @@ def run(
 if __name__ == "__main__":
     args = [arg.lower() for arg in sys.argv[1:]]
     if len(args) == 0:
-        run(countdown=True, stickies=True, dock=True, finder=True)
+        run()
         exit
     else:
         countdown = "countdown" in args

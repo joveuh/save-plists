@@ -1,4 +1,5 @@
 import os, sys, shutil, subprocess, time
+import constants
 
 """
 This script restores saved settings for 
@@ -65,82 +66,34 @@ def copy(source_dir: str, target_dir: str):
     print("All files and folders have been copied, excluding aliases.")
 
 
-def restart_dock():
+def restart(app_name: str):
     """
-    Issue  command to restart Dock for changes to take effect.
-    """
-    try:
-        subprocess.run(["killall", "Dock"], check=True)
-        print("Dock has been restarted.")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while trying to restart the Dock: {e}")
-    except FileNotFoundError:
-        print("The `killall` command was not found. Make sure you're on macOS.")
-
-
-def restart_finder():
-    """
-    Issue  command to restart Finder for changes to take effect.
+    Issue command to restart {app_name} application after restoring settings.
     """
     try:
-        subprocess.run(["killall", "Finder"], check=True)
-        print("Finder has been restarted.")
+        subprocess.run(["open", "-a", f"{app_name}"], check=True)
+        print(f"{app_name} have been launched.")
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred while trying to restart the Finder: {e}")
-    except FileNotFoundError:
-        print("The `killall` command was not found. Make sure you're on macOS.")
-
-
-def terminate_stickies():
-    """
-    Issue command to terminate Stickies before restoring settings.
-    """
-    try:
-        subprocess.run(["killall", "Stickies"], check=True)
-        print("Stickies has been terminated.")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while trying to terminate Stickies: {e}")
-    except FileNotFoundError:
-        print("The `killall` command was not found. Make sure you're on macOS.")
-
-
-def restart_stickies():
-    """
-    Issue command to restart Stickies after restoring settings.
-    """
-    try:
-        subprocess.run(["open", "-a", "Stickies"], check=True)
-        print("Stickies have been launched.")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while trying to restart Stickies: {e}")
+        print(f"An error occurred while trying to restart {app_name}: {e}")
     except FileNotFoundError:
         print("The `open` command was not found. Make sure you're on macOS.")
 
 
-def terminate_countdown():
+def terminate(app_name: str):
     """
-    Issue command to terminate CountDown Timer Plus before restoring settings.
+    Issue command to terminate the {app_name} application before restoring settings.
     """
     try:
-        subprocess.run(["killall", "CountDown Timer Plus"], check=True)
-        print("CountDown Timer Plus has been terminated.")
+        subprocess.run(["killall", f"{app_name}"], check=True)
+        print(f"{app_name} has been terminated.")
     except subprocess.CalledProcessError as e:
-        print(f"An error occurred while trying to terminate CountDown Timer Plus: {e}")
+        print(f"An error occurred while trying to terminate {app_name}: {e}")
     except FileNotFoundError:
         print("The `killall` command was not found. Make sure you're on macOS.")
 
 
-def restart_countdown():
-    """
-    Issue command to restart CountDown Timer Plus after restoring settings.
-    """
-    try:
-        subprocess.run(["open", "-a", "Countdown Timer Plus"], check=True)
-        print("CountDown Timer Plus has been launched.")
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred while trying to restart CountDown Timer Plus: {e}")
-    except FileNotFoundError:
-        print("The `open` command was not found. Make sure you're on macOS.")
+def get_target_path(app_name: str):
+    return constants.get_target_path(app_name)
 
 
 def run(
@@ -151,52 +104,29 @@ def run(
 ):
 
     HOME = os.getenv("HOME")
-
-    if countdown:
-        # countdown start
-        terminate_countdown()
-        time.sleep(0.25)
-        source_path = HOME + "/plists/countdown/Data"
-        target_path = HOME + "/Library/Containers/com.arvistech.countdowntimerplus/Data"
-        copy(source_path, target_path)
-        time.sleep(0.25)
-        restart_countdown()
-        # countdown end
-
-    if stickies:
-        # stickies start
-        terminate_stickies()
-        time.sleep(0.25)
-        source = HOME + "/plists/stickies/Data"
-        target = HOME + "/Library/Containers/com.apple.Stickies/Data"
-        copy(source, target)
-        time.sleep(0.25)
-        restart_stickies()
-        # stickies end
-
-    if dock:
-        # dock start
-        source = HOME + "/plists/dock"
-        target = HOME + "/Library/Preferences"
-        copy(source, target)
-        time.sleep(0.25)
-        restart_dock()
-        # dock end
-
-    if finder:
-        # dock start
-        source = HOME + "/plists/finder"
-        target = HOME + "/Library/Preferences"
-        copy(source, target)
-        time.sleep(0.25)
-        restart_dock()
-        # dock end
+    PLISTS_PATH = HOME + "/plists"
+    args = locals()
+    for arg in arg:
+        if args[arg]:
+            source_path = PLISTS_PATH + f"/{arg}"
+            target_path = get_target_path(arg)
+            try:
+                print(f"Restoring {arg} settings...")
+                terminate(arg)
+                time.sleep(0.1)
+                if target_path.endswith("/Data"):
+                    source_path = source_path + "/Data"
+                copy(source_path, target_path)
+                time.sleep(0.125)
+                restart(arg)
+            except Exception as e:
+                print(f"An error occurred while trying to restore {arg} settings: {e}")
 
 
 if __name__ == "__main__":
     args = [arg.lower() for arg in sys.argv[1:]]
     if len(args) == 0:
-        run(countdown=True, stickies=True, dock=True, finder=True)
+        run()
         exit
     else:
         countdown = "countdown" in args
