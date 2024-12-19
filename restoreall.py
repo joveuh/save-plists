@@ -22,6 +22,7 @@ if using python3, issue:
 
 
 def copy(source_dir: str, target_dir: str):
+    print(f"Copying files from {source_dir} to {target_dir}...")
     """
     Recursivley copy files and folders from source_dir to
     target_dir. Skip any symbolic links.
@@ -102,25 +103,23 @@ def run(
     dock: bool = True,
     finder: bool = True,
 ):
-
+    args = locals()
     HOME = os.getenv("HOME")
     PLISTS_PATH = HOME + "/plists"
-    args = locals()
-    for arg in arg:
+    for arg in args:
         if args[arg]:
             source_path = PLISTS_PATH + f"/{arg}"
             target_path = get_target_path(arg)
-            try:
-                print(f"Restoring {arg} settings...")
-                terminate(arg)
-                time.sleep(0.1)
-                if target_path.endswith("/Data"):
-                    source_path = source_path + "/Data"
-                copy(source_path, target_path)
-                time.sleep(0.125)
-                restart(arg)
-            except Exception as e:
-                print(f"An error occurred while trying to restore {arg} settings: {e}")
+            print(f"Restoring {arg} settings...")
+            terminate(constants.get_full_name(arg))
+            time.sleep(0.1)
+            if target_path.endswith("/Data"):
+                source_path = source_path + "/Data"
+            print(f"Source: {source_path}")
+            print(f"Target: {target_path}")
+            copy(source_path, target_path)
+            time.sleep(0.125)
+            restart(arg)
 
 
 if __name__ == "__main__":
