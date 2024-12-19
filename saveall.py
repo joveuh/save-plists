@@ -1,8 +1,8 @@
-import sys, save_stickies, save_dock, save_countdown, restoreall, time
+import sys, save_stickies, save_dock, save_countdown, save_finder, restoreall, time
 
 
 def run(countdown: bool = True, stickies: bool = True, dock: bool = True):
-    scripts = [save_countdown, save_dock, save_stickies]
+    scripts = [save_countdown, save_dock, save_stickies, save_finder]
     if countdown:
         restoreall.terminate_countdown()
         time.sleep(0.6)
@@ -15,14 +15,15 @@ def run(countdown: bool = True, stickies: bool = True, dock: bool = True):
         save_stickies.run()
         time.sleep(0.2)
     if dock:
-        # In case user made changes recently, we don't want to restart Dock before saving current settings, 
-        # this plist should be saved right as soon as user makes any changes - should not need a restart of Dock
         time.sleep(1)
         save_dock.run()
         time.sleep(0.2)
         restoreall.restart_dock()
     if finder:
-
+        time.sleep(1)
+        save_finder.run()
+        time.sleep(0.2)
+        restoreall.restart_finder()
 
 
 if __name__ == "__main__":

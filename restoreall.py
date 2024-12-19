@@ -78,6 +78,19 @@ def restart_dock():
         print("The `killall` command was not found. Make sure you're on macOS.")
 
 
+def restart_finder():
+    """
+    Issue  command to restart Finder for changes to take effect.
+    """
+    try:
+        subprocess.run(["killall", "Finder"], check=True)
+        print("Finder has been restarted.")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred while trying to restart the Finder: {e}")
+    except FileNotFoundError:
+        print("The `killall` command was not found. Make sure you're on macOS.")
+
+
 def terminate_stickies():
     """
     Issue command to terminate Stickies before restoring settings.
