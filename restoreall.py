@@ -105,16 +105,16 @@ def run(
 ):
     args = locals()
     HOME = os.getenv("HOME")
-    PLISTS_PATH = HOME + "/plists"
+    PLISTS_PATH = os.path.join(HOME, "plists")
     for arg in args:
         if args[arg]:
-            source_path = PLISTS_PATH + f"/{arg}"
+            source_path = os.path.join(PLISTS_PATH, f"{arg}")
             target_path = get_target_path(arg)
             print(f"Restoring {arg} settings...")
             terminate(constants.get_full_name(arg))
             time.sleep(0.1)
             if target_path.endswith("/Data"):
-                source_path = source_path + "/Data"
+                source_path = os.path.join(source_path, "Data")
             print(f"Source: {source_path}")
             print(f"Target: {target_path}")
             copy(source_path, target_path)

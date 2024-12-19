@@ -1,35 +1,23 @@
 import sys, save_stickies, save_dock, save_countdown, save_finder, restoreall, time
 
 
+def save_settings(app_name: str):
+    HOME = os.getenv("HOME")
+
 def run(
     countdown: bool = True,
     stickies: bool = True,
     dock: bool = True,
     finder: bool = True,
 ):
-
-    if countdown:
-        restoreall.terminate_countdown()
-        time.sleep(0.6)
-        save_countdown.run()
-        time.sleep(0.2)
-        restoreall.restart_countdown()
-    if stickies:
-        restoreall.terminate_stickies()
-        time.sleep(0.6)
-        save_stickies.run()
-        time.sleep(0.2)
-        restoreall.restart_stickies()
-    if dock:
-        time.sleep(1)
-        save_dock.run()
-        time.sleep(0.2)
-        restoreall.restart_dock()
-    if finder:
-        time.sleep(1)
-        save_finder.run()
-        time.sleep(0.2)
-        restoreall.restart_finder()
+    args = locals()
+    for arg in args:
+        if args[arg]:
+            restoreall.terminate(arg)
+            time.sleep(0.1)
+            save_settings(arg)
+            time.sleep(0.125)
+            restoreall.restart(arg)
 
 
 if __name__ == "__main__":
