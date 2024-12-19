@@ -29,7 +29,7 @@ def run(countdown: bool = True, stickies: bool = True, dock: bool = True):
 if __name__ == "__main__":
     args = [arg.lower() for arg in sys.argv[1:]]
     if len(args) == 0:
-        run(countdown=True, stickies=True, dock=True)
+        run(countdown=True, stickies=True, dock=True, finder=True)
         exit
     else:
         countdown = "countdown" in args
