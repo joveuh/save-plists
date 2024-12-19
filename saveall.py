@@ -21,6 +21,8 @@ def run(countdown: bool = True, stickies: bool = True, dock: bool = True):
         save_dock.run()
         time.sleep(0.2)
         restoreall.restart_dock()
+    if finder:
+
 
 
 if __name__ == "__main__":
@@ -32,4 +34,5 @@ if __name__ == "__main__":
         countdown = "countdown" in args
         stickies = "stickies" in args
         dock = "dock" in args
-        run(countdown, stickies, dock)
+        finder = "finder" in args
+        run(countdown, stickies, dock, finder)
