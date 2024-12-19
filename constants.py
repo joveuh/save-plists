@@ -1,8 +1,8 @@
 APP_NAMES = {
     "STICKIES": "/Library/Containers/com.apple.Stickies/Data",
     "COUNTDOWN_TIMER_PLUS": "/Library/Containers/com.arvistech.countdowntimerplus/Data",
-    "DOCK": "/Library/Preferences",
-    "FINDER": "/Library/Preferences",
+    "DOCK": "/Library/Preferences/com.apple.dock.plist",
+    "FINDER": "/Library/Preferences/com.apple.finder.plist",
 }
 
 
@@ -15,8 +15,6 @@ def match_app_name(app_name: str):
 
 def get_target_path(app_name: str):
     return match_app_name(app_name)
-
-
 
 
 def get_full_name(app_name: str):

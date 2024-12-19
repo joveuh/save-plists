@@ -100,23 +100,28 @@ def run(
     finder: bool = True,
 ):
     args = locals()
+    single_flag = False
     HOME = os.getenv("HOME")
     PLISTS_PATH = os.path.join(HOME, "plists")
     for arg in args:
         if args[arg]:
             source_path = os.path.join(PLISTS_PATH, f"{arg}")
-            target_path = constants.get_target_path(arg)
+            target_path = os.path.join(HOME, constants.get_target_path(arg).lstrip("/"))
+
             print(f"Restoring {arg} settings...")
             terminate(constants.get_full_name(arg))
             time.sleep(0.1)
             if target_path.endswith("/Data"):
+                single_flag = True
                 source_path = os.path.join(source_path, "Data")
-            target_path = os.path.join(HOME, target_path)
-            print(f"Source: {source_path}")
-            print(f"Target: {target_path}")
-            copy(source_path, target_path)
+
+            (
+                copy(source_path, os.path.dirname(target_path))
+                if single_flag
+                else copy(source_path, target_path)
+            )
             time.sleep(0.125)
-            restart(arg)
+            restart(constants.get_full_name(arg))
 
 
 if __name__ == "__main__":
