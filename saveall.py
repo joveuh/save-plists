@@ -1,8 +1,11 @@
-import sys, save_stickies, save_dock, save_countdown, save_finder, restoreall, time
+import sys, os, restoreall, time, constants
 
 
 def save_settings(app_name: str):
     HOME = os.getenv("HOME")
+    target_path = constants.get_target_path(app_name).split("/")
+    source_path = os.path.join(HOME, "Library", target_path, f"com.apple.{app_name}.plist")
+    # source_path = os.path.join(
 
 def run(
     countdown: bool = True,

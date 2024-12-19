@@ -93,10 +93,6 @@ def terminate(app_name: str):
         print("The `killall` command was not found. Make sure you're on macOS.")
 
 
-def get_target_path(app_name: str):
-    return constants.get_target_path(app_name)
-
-
 def run(
     countdown: bool = True,
     stickies: bool = True,
@@ -109,12 +105,13 @@ def run(
     for arg in args:
         if args[arg]:
             source_path = os.path.join(PLISTS_PATH, f"{arg}")
-            target_path = get_target_path(arg)
+            target_path = constants.get_target_path(arg)
             print(f"Restoring {arg} settings...")
             terminate(constants.get_full_name(arg))
             time.sleep(0.1)
             if target_path.endswith("/Data"):
                 source_path = os.path.join(source_path, "Data")
+            target_path = os.path.join(HOME, target_path)
             print(f"Source: {source_path}")
             print(f"Target: {target_path}")
             copy(source_path, target_path)

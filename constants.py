@@ -17,6 +17,8 @@ def get_target_path(app_name: str):
     return match_app_name(app_name)
 
 
+
+
 def get_full_name(app_name: str):
     app_name = str.upper(app_name)
     for key in APP_NAMES.keys():
