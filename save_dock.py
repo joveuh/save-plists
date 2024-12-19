@@ -24,7 +24,7 @@ def run():
     source = os.path.join(HOME, "Library", "Preferences", "com.apple.dock.plist")
     target = os.path.join(HOME, "plists", "dock", "com.apple.dock.plist")
     epochtime = int(time.time())
-    backup = os.path.join(HOME, "plists", "backups", "dock", f"{epochtime}", "Data")
+    backup = os.path.join(HOME, "plists", "backups", "dock", f"{epochtime}", "com.apple.dock.plist")
     os.makedirs(backup)
     shutil.copy2(target, backup)
     shutil.copy2(source, target)
