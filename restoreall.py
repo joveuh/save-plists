@@ -106,7 +106,9 @@ def run(
     for arg in args:
         if args[arg]:
             source_path = os.path.join(PLISTS_PATH, f"{arg}")
-            target_path = os.path.join(HOME, constants.get_target_path(arg).lstrip("/"))
+            target_path = target_path = os.path.dirname(
+                os.path.join(HOME, constants.get_target_path(arg).lstrip("/"))
+            )
 
             print(f"Restoring {arg} settings...")
             terminate(constants.get_full_name(arg))
