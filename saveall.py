@@ -59,7 +59,7 @@ def run(
             restoreall.terminate(constants.get_full_name(arg))
             time.sleep(0.1)
             save_settings(arg)
-            time.sleep(0.125)
+            time.sleep(0.1)
             restoreall.restart(constants.get_full_name(arg))
 
 

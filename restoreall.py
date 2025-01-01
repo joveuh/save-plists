@@ -85,7 +85,8 @@ def terminate(app_name: str):
     Issue command to terminate the {app_name} application before restoring settings.
     """
     try:
-        subprocess.run(["killall", f"{app_name}"], check=True)
+        script = f'tell application "{app_name}" to quit'
+        subprocess.run(["osascript", "-e", script], check=True, text=True)
         print(f"{app_name} has been terminated.")
     except subprocess.CalledProcessError as e:
         print(f"An error occurred while trying to terminate {app_name}: {e}")
