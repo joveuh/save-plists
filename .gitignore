@@ -1,0 +1,15 @@
+# Local/AI-context files — never committed
+.claude/
+BLOG.md
+HANDOFF.md
+ARCHITECTURE.md
+DEPLOY.md
+.env
+.env.local
+.env.production
+.env.example
+
+# Junk
+.DS_Store
+__pycache__/
+*.log
